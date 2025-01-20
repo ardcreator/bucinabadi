@@ -1,6 +1,12 @@
 import streamlit as st
 import random
 
+# Set page title
+st.set_page_config(
+    page_title="Sistem Cinta Abadi",
+    page_icon="❤️",
+)
+
 class Hati:
     def __init__(self, nama):
         self.nama = nama
@@ -88,6 +94,7 @@ def play_audio(url, volume=1.0):
 
 
 def main():
+    # Set background video
     st.markdown(
         """
         <style>
@@ -107,31 +114,6 @@ def main():
             min-width: 100%;
             min-height: 100%;
             object-fit: cover;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: #fff;
-            text-align: center;
-            text-decoration: none;
-            background: linear-gradient(90deg, #ff758c, #ff7eb3);
-            border-radius: 30px;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0px 4px 15px rgba(255, 94, 136, 0.5);
-            cursor: pointer;
-            margin: 10px 0;
-        }
-        .btn:hover {
-            background: linear-gradient(90deg, #ff5e6c, #ff738f);
-            box-shadow: 0px 6px 20px rgba(255, 94, 136, 0.7);
-        }
-        .title {
-            font-family: 'Caveat', cursive;
-            font-size: 3rem;
-            color: #ff5e6c;
-            text-align: center;
-            margin-bottom: 20px;
         }
         </style>
         <div class="video-container">
@@ -173,7 +155,7 @@ def main():
         if menu == "Ungkapkan Cinta":
             if st.button("Ungkapkan"):
                 hasil = st.session_state.hati.ungkapkan_cinta()
-                play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/love.mp3")
+                play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/love.mp3", volume=1.0)
                 st.success(hasil)
 
         elif menu == "Kirim Pesan Cinta":
@@ -181,7 +163,7 @@ def main():
             if st.button("Kirim Pesan"):
                 if pesan:
                     hasil = st.session_state.hati.kirim_pesan_cinta(pesan)
-                    play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/pesan.mp3")
+                    play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/pesan.mp3", volume=0.7)
                     st.success(hasil)
                 else:
                     st.warning("Pesan tidak boleh kosong.")
