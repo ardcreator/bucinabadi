@@ -31,7 +31,7 @@ def main():
             if nama:
                 st.session_state.hati = Hati(nama)
                 st.session_state.musik_aktif = True
-                st.experimental_rerun()
+                st.experimental_set_query_params(refresh="true")
             else:
                 st.warning("Nama tidak boleh kosong.")
     else:
@@ -43,7 +43,7 @@ def main():
         # Musik latar belakang
         if st.session_state.musik_aktif:
             musik_html = """
-            <audio autoplay loop>
+            <audio autoplay loop style="display: none;">
                 <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
             </audio>
             """
@@ -74,7 +74,7 @@ def main():
                 st.session_state.musik_aktif = False
                 st.audio("https://www.soundjay.com/button/beep-10.wav", format="audio/wav")
                 st.warning("Hati telah di-reset. Musik romantis telah berhenti.")
-                st.experimental_rerun()
+                st.experimental_set_query_params(refresh="true")
 
     # Footer dengan credit
     st.markdown("---")
