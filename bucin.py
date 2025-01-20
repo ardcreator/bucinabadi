@@ -2,7 +2,10 @@ import streamlit as st
 import random
 
 # Set page title
-st.set_page_config(page_title="Sistem Cinta Abadi")
+st.set_page_config(
+    page_title="Sistem Cinta Abadi",
+    page_icon="❤️"
+)
 
 class Hati:
     def __init__(self, nama):
@@ -39,77 +42,10 @@ def play_audio(url, volume=1.0, loop=False):
 
 
 def main():
-    # Menambahkan CSS untuk mendukung tema terang dan gelap
     st.markdown(
-        """
-        <style>
-        /* Background dan warna untuk tema gelap */
-        .stApp {
-            background-color: #f9f9f9;
-        }
-        .dark .stApp {
-            background-color: #121212;
-        }
-
-        /* Header dan elemen utama */
-        .title {
-            text-align: center;
-            font-size: 3rem;
-            color: #ff5e6c;
-            font-family: 'Caveat', cursive;
-            margin-top: 20px;
-        }
-
-        .dark .stMarkdown {
-            color: #fff;
-        }
-        .light .stMarkdown {
-            color: #333;
-        }
-
-        .light .stButton button, .dark .stButton button {
-            background-color: #ff5e6c;
-            color: white;
-            border-radius: 25px;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .stButton button:hover {
-            background-color: #ff738f;
-        }
-
-        /* Menu dan input form */
-        .stRadio, .stButton, .stTextInput, .stSelectbox {
-            background-color: transparent;
-            color: inherit;
-        }
-        
-        .dark .stRadio div, .dark .stButton div, .dark .stTextInput div, .dark .stSelectbox div {
-            color: #fff;
-        }
-
-        /* Footer */
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 10px 0;
-            font-size: 12px;
-            color: #666;
-        }
-
-        </style>
-        """,
+        "<h1 style='text-align: center; color: #ff5e6c;'>💖 Sistem Cinta Abadi 💖</h1>",
         unsafe_allow_html=True,
     )
-
-    st.markdown('<div class="title">💖 Sistem Cinta Abadi 💖</div>', unsafe_allow_html=True)
     st.markdown(
         "<p style='text-align: center; font-size: 1.2rem; color: #444;'>Selamat datang di aplikasi <b>Bucin Abadi</b>, tempat di mana cinta tidak pernah ada akhirnya.</p>",
         unsafe_allow_html=True,
@@ -166,7 +102,7 @@ def main():
     # Footer
     st.markdown(
         """
-        <div class="footer">
+        <div style="text-align: center; font-size: 12px; color: #666; padding: 10px;">
         Dibuat dengan ❤️ oleh <b>Ashari Rasyid</b>.
         </div>
         """,
