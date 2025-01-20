@@ -27,6 +27,10 @@ if 'musik_aktif' not in st.session_state:
     st.session_state.musik_aktif = False
 if 'page_state' not in st.session_state:
     st.session_state.page_state = "main"
+if 'ucapan' not in st.session_state:
+    st.session_state.ucapan = ""
+if 'ucapan_type' not in st.session_state:
+    st.session_state.ucapan_type = ""
 
 
 def play_audio(url, volume=1.0, loop=False):
@@ -43,8 +47,8 @@ def play_audio(url, volume=1.0, loop=False):
 
 
 def main():
+    # Halaman utama
     if st.session_state.page_state == "main":
-        # Halaman utama
         st.markdown(
             "<h1 style='text-align: center; color: #ff5e6c;'>💖 Sistem Cinta Abadi 💖</h1>",
             unsafe_allow_html=True,
@@ -78,15 +82,17 @@ def main():
                 pesan = st.text_area("Masukkan ucapan ulang tahun:", height=100)
                 if st.button("Kirim Ucapan"):
                     if pesan:
-                        st.session_state.page_state = "birthday"
+                        st.session_state.page_state = "ucapan"
                         st.session_state.ucapan = pesan
+                        st.session_state.ucapan_type = "birthday"
 
             elif menu == "Happy Anniversary":
                 pesan = st.text_area("Masukkan ucapan anniversary:", height=100)
                 if st.button("Kirim Ucapan"):
                     if pesan:
-                        st.session_state.page_state = "anniversary"
+                        st.session_state.page_state = "ucapan"
                         st.session_state.ucapan = pesan
+                        st.session_state.ucapan_type = "anniversary"
 
             elif menu == "Bagikan Sistem":
                 share_url = f"https://bucinabadi.streamlit.app/"
@@ -118,9 +124,10 @@ def main():
                     unsafe_allow_html=True,
                 )
 
-    elif st.session_state.page_state in ["birthday", "anniversary"]:
-        # Halaman ucapan
-        title = "Happy Birthday 🎂" if st.session_state.page_state == "birthday" else "Happy Anniversary 🎉"
+    # Halaman ucapan
+    elif st.session_state.page_state == "ucapan":
+        ucapan_type = st.session_state.ucapan_type
+        title = "Happy Birthday 🎂" if ucapan_type == "birthday" else "Happy Anniversary 🎉"
         st.markdown(f"<h1 style='text-align: center; color: #ff5e6c;'>{title}</h1>", unsafe_allow_html=True)
         st.markdown(
             f"<div style='text-align: center; font-size: 1.5rem; margin: 20px; color: #333;'>{st.session_state.ucapan}</div>",
