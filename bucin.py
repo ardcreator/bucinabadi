@@ -110,13 +110,23 @@ def main():
                     
                     # Generate link for sharing
                     share_message = urllib.parse.quote(f"🎉 Selamat Ulang Tahun, {nama}! 🎉 {birthday_message}")
-                    share_url = f"https://streamlit.io/sharing?app=https://bucinabadi.streamlit.app/"
+                    share_url = f"https://bucinabadi.streamlit.app/"
 
-                    # Create share link
+                    # Create share links for social media
                     st.markdown(f"""
                         <a href="https://twitter.com/intent/tweet?text={share_message}" target="_blank">
                             <button style="background-color: #1DA1F2; color: white; padding: 10px 20px; border-radius: 5px;">
                                 Share on Twitter
+                            </button>
+                        </a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={share_url}&quote={share_message}" target="_blank">
+                            <button style="background-color: #1877F2; color: white; padding: 10px 20px; border-radius: 5px;">
+                                Share on Facebook
+                            </button>
+                        </a>
+                        <a href="https://www.instagram.com/?url={share_url}" target="_blank">
+                            <button style="background-color: #E1306C; color: white; padding: 10px 20px; border-radius: 5px;">
+                                Share on Instagram
                             </button>
                         </a>
                     """, unsafe_allow_html=True)
@@ -134,13 +144,23 @@ def main():
                     
                     # Generate link for sharing
                     share_message = urllib.parse.quote(f"💍 Selamat Anniversary, {nama}! 💍 {anniversary_message}")
-                    share_url = f"https://streamlit.io/sharing?app=https://bucinabadi.streamlit.app/"
+                    share_url = f"https://bucinabadi.streamlit.app/"
 
-                    # Create share link
+                    # Create share links for social media
                     st.markdown(f"""
                         <a href="https://twitter.com/intent/tweet?text={share_message}" target="_blank">
                             <button style="background-color: #1DA1F2; color: white; padding: 10px 20px; border-radius: 5px;">
                                 Share on Twitter
+                            </button>
+                        </a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={share_url}&quote={share_message}" target="_blank">
+                            <button style="background-color: #1877F2; color: white; padding: 10px 20px; border-radius: 5px;">
+                                Share on Facebook
+                            </button>
+                        </a>
+                        <a href="https://www.instagram.com/?url={share_url}" target="_blank">
+                            <button style="background-color: #E1306C; color: white; padding: 10px 20px; border-radius: 5px;">
+                                Share on Instagram
                             </button>
                         </a>
                     """, unsafe_allow_html=True)
