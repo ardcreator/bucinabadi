@@ -4,7 +4,7 @@ import random
 # Set page title
 st.set_page_config(
     page_title="Sistem Cinta Abadi",
-    page_icon="❤️",
+    page_icon="❤️"
 )
 
 class Hati:
@@ -25,14 +25,8 @@ class Hati:
             f"Di setiap langkahku, kamu ada di pikiranku, {self.nama}. Rindu ini semakin menguat.",
             f"Kamu adalah segalanya untukku, {self.nama}. Rindu ini tak akan pernah cukup terungkap.",
             f"Setiap detik aku menunggu kamu, {self.nama}. Rindu ini mengalir begitu dalam.",
-            f"{self.nama}, kamu adalah sebab aku merasa hidup. Rindu ini semakin terasa di hatiku.",
-            f"Semua kebahagiaan datang bersamamu, {self.nama}. Aku rindu lebih dari kata-kata bisa ungkapkan.",
-            f"Ketika aku merasa lelah, aku hanya perlu memikirkan kamu, {self.nama}. Rindu ini tak pernah berhenti.",
-            f"Setiap kali aku menatap bintang, aku ingat kamu, {self.nama}. Rindu ini semakin meluap.",
-            f"Rindu ini datang tanpa henti, {self.nama}. Semakin aku mencintaimu, semakin dalam rasa rindu ini.",
-            f"Setiap langkahku, setiap napasku, aku selalu memikirkanmu, {self.nama}. Rindu ini tak pernah berhenti.",
-            f"Kamu adalah cahaya dalam hidupku, {self.nama}. Rindu ini tak terhitung banyaknya.",
-            f"Tidak ada kata yang cukup untuk menggambarkan betapa aku merindukanmu, {self.nama}. Setiap detik semakin kuat.",
+            f"{self.nama}, kamu adalah cahaya dalam hidupku, {self.nama}. Rindu ini tak terhitung banyaknya.",
+            f"Tak ada kata yang cukup untuk menggambarkan betapa aku merindukanmu, {self.nama}. Setiap detik semakin kuat.",
             f"Aku hanya bisa tersenyum setiap kali memikirkanmu, {self.nama}. Rindu ini semakin membesar.",
             f"{self.nama}, kamu adalah cintaku yang tak terhingga. Rindu ini selalu hadir di setiap langkahku.",
             f"Aku selalu mencintaimu, {self.nama}, lebih dari yang bisa aku ungkapkan. Rindu ini semakin terasa.",
@@ -81,12 +75,13 @@ if 'musik_aktif' not in st.session_state:
     st.session_state.musik_aktif = False
 
 
-def play_audio(url, volume=1.0):
+def play_audio(url, volume=1.0, loop=False):
     """
     Fungsi untuk memutar audio di latar belakang menggunakan HTML dengan kontrol volume.
     """
+    loop_attr = "loop" if loop else ""
     audio_html = f"""
-    <audio autoplay loop style="display: none;">
+    <audio autoplay {loop_attr} style="display: none;" volume="{volume}">
         <source src="{url}" type="audio/mpeg">
     </audio>
     """
@@ -94,34 +89,16 @@ def play_audio(url, volume=1.0):
 
 
 def main():
-    # Set background video
+    # Set background image
     st.markdown(
         """
         <style>
         [data-testid="stAppViewContainer"] {
-            background: transparent;
-        }
-        .video-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        .video-container video {
-            min-width: 100%;
-            min-height: 100%;
-            object-fit: cover;
+            background: url('https://images.wallpapersden.com/image/download/sunset-heart-hd-romantic-valentine-s-day_bmdma2mUmZqaraWkpJRmbmdlrWZlbmw.jpg');
+            background-size: cover;
+            background-position: center;
         }
         </style>
-        <div class="video-container">
-            <video autoplay muted loop>
-                <source src="https://raw.githubusercontent.com/ardcreator/bucinabadi/main/video/background.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
         """,
         unsafe_allow_html=True,
     )
@@ -139,7 +116,7 @@ def main():
             if nama:
                 st.session_state.hati = Hati(nama)
                 st.session_state.musik_aktif = True
-                play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/backsound.mp3")
+                play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/backsound.mp3", volume=0.2, loop=True)
             else:
                 st.warning("Nama tidak boleh kosong.")
     else:
@@ -150,7 +127,7 @@ def main():
 
         # Musik latar belakang
         if st.session_state.musik_aktif:
-            play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/backsound.mp3")
+            play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/backsound.mp3", volume=0.2, loop=True)
 
         if menu == "Ungkapkan Cinta":
             if st.button("Ungkapkan"):
@@ -175,7 +152,7 @@ def main():
             if st.button("Reset"):
                 st.session_state.hati = None
                 st.session_state.musik_aktif = False
-                play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/reset.mp3")
+                play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/reset.mp3", volume=1.0)
                 st.warning("Hati telah di-reset. Musik romantis telah berhenti.")
                 st.experimental_rerun()
 
