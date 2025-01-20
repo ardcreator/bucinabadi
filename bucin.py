@@ -17,7 +17,6 @@ class Hati:
         self.rindu += 1
         return f"{self.nama}, kamu adalah alasanku bangun setiap pagi. Aku rindu {self.rindu} kali lebih banyak setiap hari."
 
-
     def kirim_pesan_cinta(self, pesan):
         return f"Pesan untuk {self.nama}: {pesan}"
 
@@ -71,13 +70,13 @@ def main():
     # Memasukkan nama orang tersayang
     if st.session_state.hati is None:
         nama = st.text_input("Masukkan nama orang tersayang kamu:")
-        if st.button("Mulai", key="mulai_btn", help="Klik untuk memulai"):
-            if nama:
+        if nama:
+            if st.button("Mulai", key="mulai_btn", help="Klik untuk memulai"):
                 st.session_state.hati = Hati(nama)
                 st.session_state.musik_aktif = True
                 play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/backsound.mp3", volume=0.2, loop=True)
-            else:
-                st.warning("Nama tidak boleh kosong.")
+        else:
+            st.warning("Nama tidak boleh kosong.")
     else:
         nama = st.session_state.hati.nama
         # Menu Cinta
@@ -113,7 +112,8 @@ def main():
                 st.session_state.musik_aktif = False
                 play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/reset.mp3", volume=1.0)
                 st.warning("Hati telah di-reset. Musik romantis telah berhenti.")
-                st.experimental_rerun()
+                # Tidak perlu menggunakan `st.experimental_rerun()`
+                # Kita cukup membiarkan aplikasi tetap berjalan dan state akan direset
 
     # Footer
     st.markdown(
