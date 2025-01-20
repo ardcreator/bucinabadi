@@ -13,55 +13,9 @@ class Hati:
         self.rindu = 0
 
     def ungkapkan_cinta(self):
-        ungkapan = [
-            f"{self.nama}, kamu adalah alasanku bangun setiap pagi. Aku rindu {self.rindu} kali lebih banyak setiap hari.",
-            f"Setiap detik bersamamu adalah momen yang tak ternilai. Aku rindu {self.rindu} kali lebih dalam.",
-            f"Di setiap sudut dunia, aku selalu memikirkanmu, {self.nama}. Rindu ini tak pernah berhenti.",
-            f"{self.nama}, kamu adalah mimpi indah yang menjadi kenyataan. Aku rindu {self.rindu} kali lebih lama.",
-            f"Setiap kali aku melihat matahari, aku ingat kamu, {self.nama}. Rindu ini semakin dalam.",
-            f"Tak ada yang lebih indah dari cinta kita, {self.nama}. Aku rindu {self.rindu} kali lebih besar.",
-            f"Kamu adalah kebahagiaan yang datang setiap hari. Aku rindu {self.rindu} kali lebih banyak.",
-            f"Rindu ini datang dengan tak terhitung banyaknya, {self.nama}. Setiap hari aku semakin mencintaimu.",
-            f"Di setiap langkahku, kamu ada di pikiranku, {self.nama}. Rindu ini semakin menguat.",
-            f"Kamu adalah segalanya untukku, {self.nama}. Rindu ini tak akan pernah cukup terungkap.",
-            f"Setiap detik aku menunggu kamu, {self.nama}. Rindu ini mengalir begitu dalam.",
-            f"{self.nama}, kamu adalah cahaya dalam hidupku, {self.nama}. Rindu ini tak terhitung banyaknya.",
-            f"Tak ada kata yang cukup untuk menggambarkan betapa aku merindukanmu, {self.nama}. Setiap detik semakin kuat.",
-            f"Aku hanya bisa tersenyum setiap kali memikirkanmu, {self.nama}. Rindu ini semakin membesar.",
-            f"{self.nama}, kamu adalah cintaku yang tak terhingga. Rindu ini selalu hadir di setiap langkahku.",
-            f"Aku selalu mencintaimu, {self.nama}, lebih dari yang bisa aku ungkapkan. Rindu ini semakin terasa.",
-            f"Setiap hari aku ingin selalu bersamamu, {self.nama}. Rindu ini semakin kuat dengan waktu.",
-            f"Kamu adalah segalanya bagiku, {self.nama}. Rindu ini datang tanpa henti.",
-            f"{self.nama}, aku ingin kamu tahu bahwa setiap detik aku merindukanmu. Rindu ini semakin mendalam.",
-            f"Aku tidak bisa berhenti memikirkanmu, {self.nama}. Rindu ini semakin menggila.",
-            f"{self.nama}, kamu adalah cinta yang tak akan pernah tergantikan. Rindu ini semakin kuat setiap hari.",
-            f"Di setiap tempat, di setiap waktu, kamu selalu ada di pikiranku, {self.nama}. Rindu ini tak pernah hilang.",
-            f"Setiap kata yang terucap hanyalah untukmu, {self.nama}. Rindu ini tak terhingga.",
-            f"{self.nama}, cintaku padamu lebih besar dari apa pun. Rindu ini semakin menguat.",
-            f"Tak ada yang bisa menggantikanmu, {self.nama}. Rindu ini datang tanpa henti.",
-            f"{self.nama}, setiap detik tanpamu terasa kosong. Rindu ini semakin terasa.",
-            f"Kamu adalah kebahagiaan yang selalu aku tunggu, {self.nama}. Rindu ini tidak pernah berakhir.",
-            f"Setiap kali aku menatap langit, aku ingat kamu, {self.nama}. Rindu ini tidak pernah berhenti.",
-            f"{self.nama}, aku mencintaimu lebih dari yang bisa aku ungkapkan. Rindu ini semakin terasa.",
-            f"Rindu ini seperti ombak yang tak berhenti datang, {self.nama}. Semakin besar dan kuat.",
-            f"{self.nama}, hanya ada kamu dalam hatiku. Rindu ini semakin membara.",
-            f"Aku ingin selalu ada di sisimu, {self.nama}. Rindu ini tidak ada habisnya.",
-            f"Setiap hari tanpamu terasa berat, {self.nama}. Rindu ini datang setiap waktu.",
-            f"Aku mencintaimu lebih dari apapun, {self.nama}. Rindu ini semakin dalam dan kuat.",
-            f"{self.nama}, kamu adalah bagian dari hidupku yang tak tergantikan. Rindu ini semakin besar.",
-            f"Tak ada yang lebih indah dari cintamu, {self.nama}. Rindu ini semakin dalam setiap hari.",
-            f"Aku tak bisa hidup tanpa kamu, {self.nama}. Rindu ini datang dengan tak terhitung banyaknya.",
-            f"Setiap detik aku mengingatmu, {self.nama}. Rindu ini semakin terasa.",
-            f"Rindu ini tak akan pernah cukup terungkapkan, {self.nama}. Semakin besar setiap harinya.",
-            f"{self.nama}, kamu adalah alasan aku tersenyum setiap hari. Rindu ini semakin membesar.",
-            f"Semakin aku mencintaimu, semakin besar rasa rinduku, {self.nama}. Setiap detik terasa panjang.",
-            f"Setiap hari aku menantikan kamu, {self.nama}. Rindu ini semakin kuat dengan waktu.",
-            f"{self.nama}, kamu adalah cinta yang sempurna. Rindu ini semakin mendalam.",
-            f"Rindu ini selalu hadir setiap kali aku memikirkanmu, {self.nama}. Semakin besar setiap hari."
-        ]
-        # Pilih ungkapan acak
+        # Template ungkapan cinta yang statis
         self.rindu += 1
-        return random.choice(ungkapan)
+        return f"{self.nama}, kamu adalah alasanku bangun setiap pagi. Aku rindu {self.rindu} kali lebih banyak setiap hari."
 
 
     def kirim_pesan_cinta(self, pesan):
@@ -89,14 +43,19 @@ def play_audio(url, volume=1.0, loop=False):
 
 
 def main():
-    # Set background image
+    # Menghapus background video dan gambar latar belakang
     st.markdown(
         """
         <style>
         [data-testid="stAppViewContainer"] {
-            background: url('https://images.wallpapersden.com/image/download/sunset-heart-hd-romantic-valentine-s-day_bmdma2mUmZqaraWkpJRmbmdlrWZlbmw.jpg');
-            background-size: cover;
-            background-position: center;
+            background-color: #f9f9f9;
+        }
+        .title {
+            text-align: center;
+            font-size: 3rem;
+            color: #ff5e6c;
+            font-family: 'Caveat', cursive;
+            margin-top: 20px;
         }
         </style>
         """,
@@ -132,7 +91,7 @@ def main():
         if menu == "Ungkapkan Cinta":
             if st.button("Ungkapkan"):
                 hasil = st.session_state.hati.ungkapkan_cinta()
-                play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/love.mp3", volume=1.0)
+                play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/love.mp3", volume=1.0, loop=False)
                 st.success(hasil)
 
         elif menu == "Kirim Pesan Cinta":
