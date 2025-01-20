@@ -59,11 +59,13 @@ def main():
                 st.session_state.hati = Hati(nama)
                 st.session_state.musik_aktif = True
                 play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/backsound.mp3", volume=0.2, loop=True)
+        else:
+        st.warning("Isi nama terlebih dahulu agar bisa masuk ke Sistem.")
     else:
         nama = st.session_state.hati.nama
         # Menu Cinta
         st.header(f"Cinta untuk {nama}")
-        menu = st.radio("Pilih menu:", ["Ungkapkan Cinta", "Kirim Pesan Cinta", "Lihat Rindu", "Reset Cinta", "Happy Birthday", "Happy Anniversary", "Bagikan"])
+        menu = st.radio("Pilih menu:", ["Ungkapkan Cinta", "Kirim Pesan Cinta", "Lihat Rindu", "Reset Cinta", "Happy Birthday", "Happy Anniversary", "Bagikan Sistem"])
 
         # Musik latar belakang
         if st.session_state.musik_aktif:
@@ -94,12 +96,26 @@ def main():
                 st.session_state.musik_aktif = False
                 play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/reset.mp3", volume=1.0)
                 st.warning("Hati telah di-reset. Musik romantis telah berhenti.")
-                # Tidak perlu menggunakan `st.experimental_rerun()`
-                # Kita cukup membiarkan aplikasi tetap berjalan dan state akan direset
 
-        elif menu == "Bagikan":
+        elif menu == "Happy Birthday":
+            pesan = st.text_input("Masukkan ucapan ulang tahun:")
+            if st.button("Kirim ke Twitter"):
+                if pesan:
+                    twitter_text = urllib.parse.quote(pesan)
+                    twitter_url = f"https://twitter.com/intent/tweet?text={twitter_text}"
+                    st.markdown(f"[Klik untuk berbagi ke Twitter](<{twitter_url}>)", unsafe_allow_html=True)
+
+        elif menu == "Happy Anniversary":
+            pesan = st.text_input("Masukkan ucapan anniversary:")
+            if st.button("Kirim ke Twitter"):
+                if pesan:
+                    twitter_text = urllib.parse.quote(pesan)
+                    twitter_url = f"https://twitter.com/intent/tweet?text={twitter_text}"
+                    st.markdown(f"[Klik untuk berbagi ke Twitter](<{twitter_url}>)", unsafe_allow_html=True)
+
+        elif menu == "Bagikan Sistem":
             st.markdown(
-                "<h3 style='text-align: center;'>Bagikan Halaman Ini</h3>",
+                "<h3 style='text-align: center;'>Bagikan Sistem Ini</h3>",
                 unsafe_allow_html=True,
             )
 
@@ -111,9 +127,6 @@ def main():
             # Twitter Share
             twitter_text = urllib.parse.quote("Cek aplikasi ini, Sistem Cinta Abadi! ❤️")
             twitter_url = f"https://twitter.com/intent/tweet?text={twitter_text}&url={share_url}"
-
-            # Instagram (Redirect ke URL)
-            insta_url = f"https://www.instagram.com/?url={share_url}"
 
             # LinkedIn
             linkedin_url = f"https://www.linkedin.com/shareArticle?mini=true&url={share_url}&title=Sistem+Cinta+Abadi"
@@ -130,11 +143,6 @@ def main():
                     <a href="{twitter_url}" target="_blank">
                         <button style="background-color: #1DA1F2; color: white; padding: 10px 20px; border-radius: 5px; margin: 5px;">
                             Bagikan ke Twitter
-                        </button>
-                    </a>
-                    <a href="{insta_url}" target="_blank">
-                        <button style="background-color: #E1306C; color: white; padding: 10px 20px; border-radius: 5px; margin: 5px;">
-                            Bagikan ke Instagram
                         </button>
                     </a>
                     <a href="{linkedin_url}" target="_blank">
