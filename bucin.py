@@ -40,9 +40,14 @@ def main():
         st.header(f"Cinta untuk {nama}")
         menu = st.radio("Pilih menu:", ["Ungkapkan Cinta", "Kirim Pesan Cinta", "Lihat Rindu", "Reset Cinta"])
 
-        # Musik romantis
+        # Musik latar belakang
         if st.session_state.musik_aktif:
-            st.audio("https://www.bensound.com/bensound-music/bensound-romantic.mp3", format="audio/mp3", start_time=0)
+            musik_html = """
+            <audio autoplay loop>
+                <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+            </audio>
+            """
+            st.markdown(musik_html, unsafe_allow_html=True)
 
         if menu == "Ungkapkan Cinta":
             if st.button("Ungkapkan"):
