@@ -65,7 +65,7 @@ def main():
         nama = st.session_state.hati.nama
         # Menu Cinta
         st.header(f"Cinta untuk {nama}")
-        menu = st.radio("Pilih menu:", ["Ungkapkan Cinta", "Kirim Pesan Cinta", "Lihat Rindu", "Reset Cinta", "Happy Birthday", "Happy Anniversary", "Bagikan"])
+        menu = st.radio("Pilih menu:", ["Ungkapkan Cinta", "Kirim Pesan Cinta", "Lihat Rindu", "Reset Cinta", "Happy Birthday", "Happy Anniversary"])
 
         # Musik latar belakang
         if st.session_state.musik_aktif:
