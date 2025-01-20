@@ -31,7 +31,7 @@ def main():
             if nama:
                 st.session_state.hati = Hati(nama)
                 st.session_state.musik_aktif = True
-                st.experimental_set_query_params(refresh="true")
+                st.query_params.update(refresh="true")  # Ganti experimental_set_query_params
             else:
                 st.warning("Nama tidak boleh kosong.")
     else:
@@ -74,7 +74,7 @@ def main():
                 st.session_state.musik_aktif = False
                 st.audio("https://www.soundjay.com/button/beep-10.wav", format="audio/wav")
                 st.warning("Hati telah di-reset. Musik romantis telah berhenti.")
-                st.experimental_set_query_params(refresh="true")
+                st.query_params.update(refresh="true")  # Ganti experimental_set_query_params
 
     # Footer dengan credit
     st.markdown("---")
