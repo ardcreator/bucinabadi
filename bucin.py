@@ -60,7 +60,6 @@ def main():
                 st.session_state.musik_aktif = True
                 play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/backsound.mp3", volume=0.2, loop=True)
         else:
-            st.warning("Nama tidak boleh kosong.")
     else:
         nama = st.session_state.hati.nama
         # Menu Cinta
