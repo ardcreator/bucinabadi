@@ -46,7 +46,7 @@ def main():
     st.markdown(
         """
         <style>
-        /* Untuk mendeteksi tema terang/gelap */
+        /* Style dasar */
         .stApp {
             background-color: #f9f9f9;
         }
@@ -58,19 +58,65 @@ def main():
             margin-top: 20px;
         }
 
-        /* Menyesuaikan warna untuk tema gelap dan terang */
+        /* Warna teks untuk tema terang dan gelap */
         .dark .stMarkdown, .light .stMarkdown {
             color: #333;
         }
 
-        /* Warna teks gelap untuk tema terang */
         .light .stMarkdown {
             color: #444;
         }
 
-        /* Warna teks terang untuk tema gelap */
         .dark .stMarkdown {
             color: #fff;
+        }
+
+        /* Menu dan tombol */
+        .stRadio, .stButton, .stTextInput, .stSelectbox {
+            background-color: transparent;
+            color: inherit;
+        }
+
+        /* Gaya untuk menu */
+        .stRadio div, .stButton div, .stTextInput div, .stSelectbox div {
+            color: inherit;
+        }
+
+        /* Menu pilihan untuk tema gelap dan terang */
+        .light .stRadio div, .light .stButton div, .light .stTextInput div, .light .stSelectbox div {
+            color: #333;
+        }
+
+        .dark .stRadio div, .dark .stButton div, .dark .stTextInput div, .dark .stSelectbox div {
+            color: #fff;
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 0;
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Tombol dengan transisi */
+        .stButton button {
+            background-color: #ff5e6c;
+            color: white;
+            border-radius: 25px;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .stButton button:hover {
+            background-color: #ff738f;
         }
         </style>
         """,
@@ -134,19 +180,6 @@ def main():
     # Footer
     st.markdown(
         """
-        <style>
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 10px 0;
-            font-size: 12px;
-            color: #666;
-        }
-        </style>
         <div class="footer">
         Dibuat dengan ❤️ oleh <b>Ashari Rasyid</b>.
         </div>
