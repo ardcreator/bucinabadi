@@ -20,12 +20,12 @@ if 'musik_aktif' not in st.session_state:
     st.session_state.musik_aktif = False
 
 
-def play_audio(url):
+def play_audio(url, volume=1.0):
     """
-    Fungsi untuk memutar audio di latar belakang menggunakan HTML.
+    Fungsi untuk memutar audio di latar belakang menggunakan HTML dengan kontrol volume.
     """
     audio_html = f"""
-    <audio autoplay style="display: none;">
+    <audio autoplay style="display: none;" volume="{volume}">
         <source src="{url}" type="audio/mpeg">
     </audio>
     """
@@ -36,15 +36,8 @@ def main():
     st.markdown(
         """
         <style>
-        body {
-            background-color: #f5f5f5;
-        }
         [data-testid="stAppViewContainer"] {
             background: transparent;
-        }
-        [data-testid="stSidebar"] {
-            background-color: rgba(255, 255, 255, 0.9);
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
         }
         .video-container {
             position: fixed;
@@ -88,7 +81,7 @@ def main():
         </style>
         <div class="video-container">
             <video autoplay muted loop>
-                <source src="https://www.videvo.net/videvo_files/converted/2018_07/preview/180705_07_B_HeartBackground_1080p.mp4568.webm" type="video/webm">
+                <source src="https://raw.githubusercontent.com/ardcreator/bucinabadi/main/video/background.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -109,7 +102,7 @@ def main():
             if nama:
                 st.session_state.hati = Hati(nama)
                 st.session_state.musik_aktif = True
-                play_audio("https://example.com/musik_romantis.mp3")  # Ganti URL
+                play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/backsound.mp3", volume=0.5)
                 st.experimental_rerun()
             else:
                 st.warning("Nama tidak boleh kosong.")
@@ -121,12 +114,12 @@ def main():
 
         # Musik latar belakang
         if st.session_state.musik_aktif:
-            play_audio("backsound.mp3")
+            play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/backsound.mp3", volume=0.2)
 
         if menu == "Ungkapkan Cinta":
             if st.button("Ungkapkan"):
                 hasil = st.session_state.hati.ungkapkan_cinta()
-                play_audio("love.mp3")
+                play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/love.mp3", volume=1.0)
                 st.success(hasil)
 
         elif menu == "Kirim Pesan Cinta":
@@ -134,7 +127,7 @@ def main():
             if st.button("Kirim Pesan"):
                 if pesan:
                     hasil = st.session_state.hati.kirim_pesan_cinta(pesan)
-                    play_audio("pesan.mp3")
+                    play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/pesan.mp3", volume=0.7)
                     st.success(hasil)
                 else:
                     st.warning("Pesan tidak boleh kosong.")
@@ -146,7 +139,7 @@ def main():
             if st.button("Reset"):
                 st.session_state.hati = None
                 st.session_state.musik_aktif = False
-                play_audio("kecewa.mp3")
+                play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/reset.mp3", volume=1.0)
                 st.warning("Hati telah di-reset. Musik romantis telah berhenti.")
                 st.experimental_rerun()
 
