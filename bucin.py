@@ -16,22 +16,6 @@ class Hati:
         self.rindu += 1
         return f"{self.nama}, kamu adalah alasanku bangun setiap pagi. Aku rindu {self.rindu} kali lebih banyak setiap hari."
 
-    def kirim_pesan_cinta(self, pesan):
-        return f"Pesan untuk {self.nama}: {pesan}"
-
-
-# Inisialisasi state Streamlit
-if 'hati' not in st.session_state:
-    st.session_state.hati = None
-if 'musik_aktif' not in st.session_state:
-    st.session_state.musik_aktif = False
-if 'page_state' not in st.session_state:
-    st.session_state.page_state = "main"
-if 'ucapan' not in st.session_state:
-    st.session_state.ucapan = ""
-if 'ucapan_type' not in st.session_state:
-    st.session_state.ucapan_type = ""
-
 
 def play_audio(url, volume=1.0, loop=False):
     """
@@ -46,113 +30,90 @@ def play_audio(url, volume=1.0, loop=False):
     st.markdown(audio_html, unsafe_allow_html=True)
 
 
+# Inisialisasi state Streamlit
+if 'hati' not in st.session_state:
+    st.session_state.hati = None
+
+
 def main():
-    # Halaman utama
-    if st.session_state.page_state == "main":
-        st.markdown(
-            "<h1 style='text-align: center; color: #ff5e6c;'>💖 Sistem Cinta Abadi 💖</h1>",
-            unsafe_allow_html=True,
-        )
-        st.markdown(
-            "<p style='text-align: center; font-size: 1.2rem; color: #444;'>Selamat datang di aplikasi <b>Bucin Abadi</b>, tempat di mana cinta tidak pernah ada akhirnya.</p>",
-            unsafe_allow_html=True,
-        )
+    st.markdown(
+        "<h1 style='text-align: center; color: #ff5e6c;'>💖 Sistem Cinta Abadi 💖</h1>",
+        unsafe_allow_html=True,
+    )
 
-        # Memasukkan nama orang tersayang
-        if st.session_state.hati is None:
-            nama = st.text_input("Masukkan nama orang tersayang kamu:")
-            if nama:
-                if st.button("Mulai", key="mulai_btn", help="Klik untuk memulai"):
-                    st.session_state.hati = Hati(nama)
-                    st.session_state.musik_aktif = True
-                    play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/backsound.mp3", volume=0.2, loop=True)
-        else:
-            nama = st.session_state.hati.nama
-            # Menu Cinta
-            st.header(f"Cinta untuk {nama}")
-            menu = st.radio("Pilih menu:", ["Ungkapkan Cinta", "Happy Birthday", "Happy Anniversary", "Bagikan Sistem"])
+    # Masukkan nama orang tersayang
+    if st.session_state.hati is None:
+        nama = st.text_input("Masukkan nama orang tersayang kamu:")
+        if nama:
+            if st.button("Mulai"):
+                st.session_state.hati = Hati(nama)
+    else:
+        nama = st.session_state.hati.nama
 
-            if menu == "Ungkapkan Cinta":
-                if st.button("Ungkapkan"):
-                    hasil = st.session_state.hati.ungkapkan_cinta()
-                    play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/love.mp3", volume=1.0, loop=False)
-                    st.success(hasil)
-
-            elif menu == "Happy Birthday":
-                pesan = st.text_area("Masukkan ucapan ulang tahun:", height=100)
-                if st.button("Kirim Ucapan"):
-                    if pesan:
-                        st.session_state.page_state = "ucapan"
-                        st.session_state.ucapan = pesan
-                        st.session_state.ucapan_type = "birthday"
-
-            elif menu == "Happy Anniversary":
-                pesan = st.text_area("Masukkan ucapan anniversary:", height=100)
-                if st.button("Kirim Ucapan"):
-                    if pesan:
-                        st.session_state.page_state = "ucapan"
-                        st.session_state.ucapan = pesan
-                        st.session_state.ucapan_type = "anniversary"
-
-            elif menu == "Bagikan Sistem":
-                share_url = f"https://bucinabadi.streamlit.app/"
-                fb_url = f"https://www.facebook.com/sharer/sharer.php?u={share_url}"
-                twitter_text = urllib.parse.quote("Cek aplikasi ini, Sistem Cinta Abadi! ❤️")
-                twitter_url = f"https://twitter.com/intent/tweet?text={twitter_text}&url={share_url}"
-                linkedin_url = f"https://www.linkedin.com/shareArticle?mini=true&url={share_url}&title=Sistem+Cinta+Abadi"
-
-                st.markdown(
-                    f"""
-                    <div style="text-align: center;">
-                        <a href="{fb_url}" target="_blank">
-                            <button style="background-color: #1877F2; color: white; padding: 10px 20px; border-radius: 5px; margin: 5px;">
-                                Bagikan ke Facebook
-                            </button>
-                        </a>
-                        <a href="{twitter_url}" target="_blank">
-                            <button style="background-color: #1DA1F2; color: white; padding: 10px 20px; border-radius: 5px; margin: 5px;">
-                                Bagikan ke Twitter
-                            </button>
-                        </a>
-                        <a href="{linkedin_url}" target="_blank">
-                            <button style="background-color: #0077B5; color: white; padding: 10px 20px; border-radius: 5px; margin: 5px;">
-                                Bagikan ke LinkedIn
-                            </button>
-                        </a>
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                )
-
-    # Halaman ucapan
-    elif st.session_state.page_state == "ucapan":
-        ucapan_type = st.session_state.ucapan_type
-        title = "Happy Birthday 🎂" if ucapan_type == "birthday" else "Happy Anniversary 🎉"
-        st.markdown(f"<h1 style='text-align: center; color: #ff5e6c;'>{title}</h1>", unsafe_allow_html=True)
-        st.markdown(
-            f"<div style='text-align: center; font-size: 1.5rem; margin: 20px; color: #333;'>{st.session_state.ucapan}</div>",
-            unsafe_allow_html=True,
+        # Menu pilihan
+        menu = st.radio(
+            "Pilih menu:",
+            ["Ungkapkan Cinta", "Happy Birthday", "Happy Anniversary"],
+            horizontal=True
         )
 
-        # Tombol bagikan ke Twitter
-        twitter_text = urllib.parse.quote(st.session_state.ucapan)
-        twitter_url = f"https://twitter.com/intent/tweet?text={twitter_text}"
-        st.markdown(
-            f"""
-            <div style="text-align: center;">
-                <a href="{twitter_url}" target="_blank">
-                    <button style="background-color: #1DA1F2; color: white; padding: 10px 20px; border-radius: 5px;">
-                        Bagikan ke Twitter
-                    </button>
-                </a>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
+        if menu == "Ungkapkan Cinta":
+            if st.button("Ungkapkan"):
+                hasil = st.session_state.hati.ungkapkan_cinta()
+                play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/love.mp3", volume=1.0, loop=False)
+                st.success(hasil)
 
-        # Tombol kembali
-        if st.button("Kembali"):
-            st.session_state.page_state = "main"
+        elif menu == "Happy Birthday":
+            # Input custom pesan
+            birthday_message = st.text_area(f"Masukkan pesan untuk {nama} di ulang tahunnya:")
+            if st.button("Kirim Ucapan Ulang Tahun"):
+                if birthday_message:
+                    play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/birthday.mp3", volume=1.0)
+                    st.markdown(f"<h2 style='text-align: center;'>🎉 Selamat Ulang Tahun, {nama}! 🎉</h2>", unsafe_allow_html=True)
+                    st.markdown(f"<p style='text-align: center; font-size: 1.5rem;'>{birthday_message}</p>", unsafe_allow_html=True)
+
+                    # Generate link for sharing
+                    share_message = urllib.parse.quote(f"🎉 Selamat Ulang Tahun, {nama}! 🎉 {birthday_message}")
+                    twitter_url = f"https://twitter.com/intent/tweet?text={share_message}"
+
+                    # Create share button
+                    st.markdown(f"""
+                        <div style="text-align: center;">
+                            <a href="{twitter_url}" target="_blank">
+                                <button style="background-color: #1DA1F2; color: white; padding: 10px 20px; border-radius: 5px;">
+                                    Share on Twitter
+                                </button>
+                            </a>
+                        </div>
+                    """, unsafe_allow_html=True)
+                else:
+                    st.warning("Pesan tidak boleh kosong.")
+
+        elif menu == "Happy Anniversary":
+            # Input custom pesan
+            anniversary_message = st.text_area(f"Masukkan pesan untuk {nama} di anniversary pernikahannya:")
+            if st.button("Kirim Ucapan Anniversary"):
+                if anniversary_message:
+                    play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/anniversary.mp3", volume=1.0)
+                    st.markdown(f"<h2 style='text-align: center;'>💍 Selamat Anniversary, {nama}! 💍</h2>", unsafe_allow_html=True)
+                    st.markdown(f"<p style='text-align: center; font-size: 1.5rem;'>{anniversary_message}</p>", unsafe_allow_html=True)
+
+                    # Generate link for sharing
+                    share_message = urllib.parse.quote(f"💍 Selamat Anniversary, {nama}! 💍 {anniversary_message}")
+                    twitter_url = f"https://twitter.com/intent/tweet?text={share_message}"
+
+                    # Create share button
+                    st.markdown(f"""
+                        <div style="text-align: center;">
+                            <a href="{twitter_url}" target="_blank">
+                                <button style="background-color: #1DA1F2; color: white; padding: 10px 20px; border-radius: 5px;">
+                                    Share on Twitter
+                                </button>
+                            </a>
+                        </div>
+                    """, unsafe_allow_html=True)
+                else:
+                    st.warning("Pesan tidak boleh kosong.")
 
 
 if __name__ == "__main__":
