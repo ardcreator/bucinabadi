@@ -42,11 +42,12 @@ def play_audio(url, volume=1.0, loop=False):
 
 
 def main():
-    # Menghapus background video dan gambar latar belakang
+    # Menambahkan CSS untuk mendukung tema terang dan gelap
     st.markdown(
         """
         <style>
-        [data-testid="stAppViewContainer"] {
+        /* Untuk mendeteksi tema terang/gelap */
+        .stApp {
             background-color: #f9f9f9;
         }
         .title {
@@ -55,6 +56,21 @@ def main():
             color: #ff5e6c;
             font-family: 'Caveat', cursive;
             margin-top: 20px;
+        }
+
+        /* Menyesuaikan warna untuk tema gelap dan terang */
+        .dark .stMarkdown, .light .stMarkdown {
+            color: #333;
+        }
+
+        /* Warna teks gelap untuk tema terang */
+        .light .stMarkdown {
+            color: #444;
+        }
+
+        /* Warna teks terang untuk tema gelap */
+        .dark .stMarkdown {
+            color: #fff;
         }
         </style>
         """,
