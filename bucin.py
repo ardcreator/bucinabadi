@@ -2,10 +2,7 @@ import streamlit as st
 import random
 
 # Set page title
-st.set_page_config(
-    page_title="Sistem Cinta Abadi",
-    page_icon="❤️"
-)
+st.set_page_config(page_title="Sistem Cinta Abadi")
 
 class Hati:
     def __init__(self, nama):
@@ -46,10 +43,15 @@ def main():
     st.markdown(
         """
         <style>
-        /* Style dasar */
+        /* Background dan warna untuk tema gelap */
         .stApp {
             background-color: #f9f9f9;
         }
+        .dark .stApp {
+            background-color: #121212;
+        }
+
+        /* Header dan elemen utama */
         .title {
             text-align: center;
             font-size: 3rem;
@@ -58,35 +60,33 @@ def main():
             margin-top: 20px;
         }
 
-        /* Warna teks untuk tema terang dan gelap */
-        .dark .stMarkdown, .light .stMarkdown {
-            color: #333;
-        }
-
-        .light .stMarkdown {
-            color: #444;
-        }
-
         .dark .stMarkdown {
             color: #fff;
         }
+        .light .stMarkdown {
+            color: #333;
+        }
 
-        /* Menu dan tombol */
+        .light .stButton button, .dark .stButton button {
+            background-color: #ff5e6c;
+            color: white;
+            border-radius: 25px;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .stButton button:hover {
+            background-color: #ff738f;
+        }
+
+        /* Menu dan input form */
         .stRadio, .stButton, .stTextInput, .stSelectbox {
             background-color: transparent;
             color: inherit;
         }
-
-        /* Gaya untuk menu */
-        .stRadio div, .stButton div, .stTextInput div, .stSelectbox div {
-            color: inherit;
-        }
-
-        /* Menu pilihan untuk tema gelap dan terang */
-        .light .stRadio div, .light .stButton div, .light .stTextInput div, .light .stSelectbox div {
-            color: #333;
-        }
-
+        
         .dark .stRadio div, .dark .stButton div, .dark .stTextInput div, .dark .stSelectbox div {
             color: #fff;
         }
@@ -104,20 +104,6 @@ def main():
             color: #666;
         }
 
-        /* Tombol dengan transisi */
-        .stButton button {
-            background-color: #ff5e6c;
-            color: white;
-            border-radius: 25px;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .stButton button:hover {
-            background-color: #ff738f;
-        }
         </style>
         """,
         unsafe_allow_html=True,
