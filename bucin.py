@@ -65,7 +65,7 @@ def main():
         nama = st.session_state.hati.nama
         # Menu Cinta
         st.header(f"Cinta untuk {nama}")
-        menu = st.radio("Pilih menu:", ["Ungkapkan Cinta", "Kirim Pesan Cinta", "Lihat Rindu", "Reset Cinta", "Happy Birthday", "Happy Anniversary"])
+        menu = st.radio("Pilih menu:", ["Ungkapkan Cinta", "Kirim Pesan Cinta", "Lihat Rindu", "Reset Cinta", "Happy Birthday", "Happy Anniversary", "Bagikan"])
 
         # Musik latar belakang
         if st.session_state.musik_aktif:
@@ -99,73 +99,55 @@ def main():
                 # Tidak perlu menggunakan `st.experimental_rerun()`
                 # Kita cukup membiarkan aplikasi tetap berjalan dan state akan direset
 
-        elif menu == "Happy Birthday":
-            # Input custom pesan
-            birthday_message = st.text_area(f"Masukkan pesan untuk {nama} di ulang tahunnya:")
-            if st.button("Kirim Ucapan Ulang Tahun"):
-                if birthday_message:
-                    play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/birthday.mp3", volume=1.0)
-                    st.markdown(f"<h2 style='text-align: center;'>🎉 Selamat Ulang Tahun, {nama}! 🎉</h2>", unsafe_allow_html=True)
-                    st.markdown(f"<p style='text-align: center; font-size: 1.5rem;'>{birthday_message}</p>", unsafe_allow_html=True)
-                    
-                    # Generate link for sharing
-                    share_message = urllib.parse.quote(f"🎉 Selamat Ulang Tahun, {nama}! 🎉 {birthday_message}")
-                    share_url = f"https://bucinabadi.streamlit.app/"
+        elif menu == "Bagikan":
+            st.markdown(
+                "<h3 style='text-align: center;'>Bagikan Halaman Ini</h3>",
+                unsafe_allow_html=True,
+            )
 
-                    # Create share links for social media
-                    st.markdown(f"""
-                        <a href="https://twitter.com/intent/tweet?text={share_message}" target="_blank">
-                            <button style="background-color: #1DA1F2; color: white; padding: 10px 20px; border-radius: 5px;">
-                                Share on Twitter
-                            </button>
-                        </a>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={share_url}&quote={share_message}" target="_blank">
-                            <button style="background-color: #1877F2; color: white; padding: 10px 20px; border-radius: 5px;">
-                                Share on Facebook
-                            </button>
-                        </a>
-                        <a href="https://www.instagram.com/?url={share_url}" target="_blank">
-                            <button style="background-color: #E1306C; color: white; padding: 10px 20px; border-radius: 5px;">
-                                Share on Instagram
-                            </button>
-                        </a>
-                    """, unsafe_allow_html=True)
-                else:
-                    st.warning("Pesan tidak boleh kosong.")
+            share_url = f"https://bucinabadi.streamlit.app/"
 
-        elif menu == "Happy Anniversary":
-            # Input custom pesan
-            anniversary_message = st.text_area(f"Masukkan pesan untuk {nama} di anniversary pernikahannya:")
-            if st.button("Kirim Ucapan Anniversary"):
-                if anniversary_message:
-                    play_audio("https://raw.githubusercontent.com/ardcreator/bucinabadi/main/audio/anniversary.mp3", volume=1.0)
-                    st.markdown(f"<h2 style='text-align: center;'>💍 Selamat Anniversary, {nama}! 💍</h2>", unsafe_allow_html=True)
-                    st.markdown(f"<p style='text-align: center; font-size: 1.5rem;'>{anniversary_message}</p>", unsafe_allow_html=True)
-                    
-                    # Generate link for sharing
-                    share_message = urllib.parse.quote(f"💍 Selamat Anniversary, {nama}! 💍 {anniversary_message}")
-                    share_url = f"https://bucinabadi.streamlit.app/"
+            # Facebook Share
+            fb_url = f"https://www.facebook.com/sharer/sharer.php?u={share_url}"
 
-                    # Create share links for social media
-                    st.markdown(f"""
-                        <a href="https://twitter.com/intent/tweet?text={share_message}" target="_blank">
-                            <button style="background-color: #1DA1F2; color: white; padding: 10px 20px; border-radius: 5px;">
-                                Share on Twitter
-                            </button>
-                        </a>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={share_url}&quote={share_message}" target="_blank">
-                            <button style="background-color: #1877F2; color: white; padding: 10px 20px; border-radius: 5px;">
-                                Share on Facebook
-                            </button>
-                        </a>
-                        <a href="https://www.instagram.com/?url={share_url}" target="_blank">
-                            <button style="background-color: #E1306C; color: white; padding: 10px 20px; border-radius: 5px;">
-                                Share on Instagram
-                            </button>
-                        </a>
-                    """, unsafe_allow_html=True)
-                else:
-                    st.warning("Pesan tidak boleh kosong.")
+            # Twitter Share
+            twitter_text = urllib.parse.quote("Cek aplikasi ini, Sistem Cinta Abadi! ❤️")
+            twitter_url = f"https://twitter.com/intent/tweet?text={twitter_text}&url={share_url}"
+
+            # Instagram (Redirect ke URL)
+            insta_url = f"https://www.instagram.com/?url={share_url}"
+
+            # LinkedIn
+            linkedin_url = f"https://www.linkedin.com/shareArticle?mini=true&url={share_url}&title=Sistem+Cinta+Abadi"
+
+            # Tombol Bagikan
+            st.markdown(
+                f"""
+                <div style="text-align: center;">
+                    <a href="{fb_url}" target="_blank">
+                        <button style="background-color: #1877F2; color: white; padding: 10px 20px; border-radius: 5px; margin: 5px;">
+                            Bagikan ke Facebook
+                        </button>
+                    </a>
+                    <a href="{twitter_url}" target="_blank">
+                        <button style="background-color: #1DA1F2; color: white; padding: 10px 20px; border-radius: 5px; margin: 5px;">
+                            Bagikan ke Twitter
+                        </button>
+                    </a>
+                    <a href="{insta_url}" target="_blank">
+                        <button style="background-color: #E1306C; color: white; padding: 10px 20px; border-radius: 5px; margin: 5px;">
+                            Bagikan ke Instagram
+                        </button>
+                    </a>
+                    <a href="{linkedin_url}" target="_blank">
+                        <button style="background-color: #0077B5; color: white; padding: 10px 20px; border-radius: 5px; margin: 5px;">
+                            Bagikan ke LinkedIn
+                        </button>
+                    </a>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
 
     # Footer
     st.markdown(
