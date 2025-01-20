@@ -13,31 +13,41 @@ class Hati:
         return f"Pesan untuk {self.nama}: {pesan}"
 
 
-# Inisialisasi objek Hati
+# Inisialisasi state Streamlit
 if 'hati' not in st.session_state:
     st.session_state.hati = None
+if 'musik_aktif' not in st.session_state:
+    st.session_state.musik_aktif = False
 
 
 def main():
-    st.title("❤️ Sistem Cinta Abadi ❤️")
+    st.title("💖 Sistem Cinta Abadi 💖")
     st.markdown("Selamat datang di aplikasi **Bucin Abadi**, tempat di mana cinta tidak pernah ada akhirnya.")
 
+    # Memasukkan nama orang tersayang
     if st.session_state.hati is None:
         nama = st.text_input("Masukkan nama orang tersayang kamu:", key="nama_input")
         if st.button("Mulai", key="mulai_btn"):
             if nama:
                 st.session_state.hati = Hati(nama)
-                st.success(f"Hati telah dibuat untuk {nama}!")
+                st.session_state.musik_aktif = True
+                st.experimental_rerun()
             else:
                 st.warning("Nama tidak boleh kosong.")
     else:
         nama = st.session_state.hati.nama
+        # Menu Cinta
         st.header(f"Cinta untuk {nama}")
-        menu = st.radio("Pilih menu:", ["Ungkapkan Cinta", "Kirim Pesan Cinta", "Lihat Rindu", "Reset"])
+        menu = st.radio("Pilih menu:", ["Ungkapkan Cinta", "Kirim Pesan Cinta", "Lihat Rindu", "Reset Cinta"])
+
+        # Musik romantis
+        if st.session_state.musik_aktif:
+            st.audio("https://www.bensound.com/bensound-music/bensound-romantic.mp3", format="audio/mp3", start_time=0)
 
         if menu == "Ungkapkan Cinta":
             if st.button("Ungkapkan"):
                 hasil = st.session_state.hati.ungkapkan_cinta()
+                st.audio("https://www.soundjay.com/button/beep-07.wav", format="audio/wav")
                 st.success(hasil)
 
         elif menu == "Kirim Pesan Cinta":
@@ -45,6 +55,7 @@ def main():
             if st.button("Kirim Pesan"):
                 if pesan:
                     hasil = st.session_state.hati.kirim_pesan_cinta(pesan)
+                    st.audio("https://www.soundjay.com/button/button-09.wav", format="audio/wav")
                     st.success(hasil)
                 else:
                     st.warning("Pesan tidak boleh kosong.")
@@ -52,10 +63,13 @@ def main():
         elif menu == "Lihat Rindu":
             st.info(f"Rindu untuk {nama}: {st.session_state.hati.rindu} kali.")
 
-        elif menu == "Reset":
-            if st.button("Reset Semua"):
+        elif menu == "Reset Cinta":
+            if st.button("Reset"):
                 st.session_state.hati = None
-                st.warning("Hati telah di-reset.")
+                st.session_state.musik_aktif = False
+                st.audio("https://www.soundjay.com/button/beep-10.wav", format="audio/wav")
+                st.warning("Hati telah di-reset. Musik romantis telah berhenti.")
+                st.experimental_rerun()
 
     # Footer dengan credit
     st.markdown("---")
